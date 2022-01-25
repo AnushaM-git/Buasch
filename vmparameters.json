@@ -1,0 +1,139 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vmNames": {
+            "value": [
+                "XXXXXXXXXXXX"
+            ]
+        },
+        "vmComputerNamesTransformation" :{
+            "value": "uppercase"
+        },
+        "imageReference": {
+            "value": {
+                "id": "/subscriptions/subid/resourceGroups/AZ-US-E-SS-IMG-RG-01/providers/Microsoft.Compute/galleries/AZUSESSIMGSIG01/images/AZ-GLB-IMG-WINDOWS2019-01/versions/1.0.0"
+            }
+        },
+        "workspaceId": {
+            "value": "/subscriptions/subid/resourcegroups/az-us-e-ss-dev-mgmt-rg-01/providers/microsoft.operationalinsights/workspaces/az-us-e-ss-dev-law-01"
+        },
+        "vmSize": {
+            "value": "Standard_E4as_v4"
+        },
+        "licenseType": {
+            "value": "Windows_Server"
+        },
+        // "enableWindowsMMAAgent": {
+        //     "value": true
+        // },
+        // "enableWindowsDependencyAgent": {
+        //     "value": true
+        // },
+        "enableNetworkWatcherWindows":{
+            "value": true
+        },
+        "osDisk": {
+            "value": {
+                "createOption": "fromImage",
+                "diskSizeGB": "128",
+                "managedDisk": {
+                    "storageAccountType": "Standard_LRS"
+                }
+            }
+        },
+        "dataDisks": {
+            "value": [
+                {
+                    "caching": "ReadWrite",
+                    "createOption": "Empty",
+                    "diskSizeGB": "100",
+                    "managedDisk": {
+                        "storageAccountType": "Standard_LRS"
+                    }
+                }
+            ]
+        },
+        "domainName": {
+            "value": "valeant.corp.vrx"
+        },
+        "domainJoinUser": {
+            "reference": {
+                "keyVault": {
+                    "id": "/subscriptions/subid/resourceGroups/AZ-US-E-SS-PRD-MGMT-RG-01/providers/Microsoft.KeyVault/vaults/AZ-US-E-SS-PMGMT-KV-101"
+                },
+                "secretName": "ValeantDomainJoinUN"
+            }
+        },
+        "domainJoinOU": {
+            "reference": {
+                "keyVault": {
+                    "id": "/subscriptions/subid/resourceGroups/AZ-US-E-SS-PRD-MGMT-RG-01/providers/Microsoft.KeyVault/vaults/AZ-US-E-SS-PMGMT-KV-101"
+                },
+                "secretName": "ValeantDomainJoinOU"
+            }
+        },
+        "domainJoinPassword": {
+            "reference": {
+                "keyVault": {
+                    "id": "/subscriptions/subid/resourceGroups/AZ-US-E-SS-PRD-MGMT-RG-01/providers/Microsoft.KeyVault/vaults/AZ-US-E-SS-PMGMT-KV-101"
+                },
+                "secretName": "ValeantDomainJoinPWD"
+            }
+        },
+        "domainJoinRestart": {
+            "value": true
+        },        
+        "adminUsername": {
+            "value": "remainCoAdmin"
+        },
+        "adminPassword": {
+            "reference": {
+                "keyVault": {
+                    "id": "/subscriptions/subid/resourceGroups/AZ-US-E-SS-PRD-MGMT-RG-01/providers/Microsoft.KeyVault/vaults/AZ-US-E-SS-PMGMT-KV-101"
+                },
+                "secretName": "remainCoSecret"
+            }
+        },
+        "backupVaultName": {
+            "value": "AZ-US-E-DEV-LRS-RSV-01"
+        },
+        "backupVaultResourceGroup": {
+            "value": "AZ-US-E-DEV-BKP-RG-01"
+        },
+        "backupPolicyName": {
+            "value": "DefaultIaaSPolicy"
+        },
+        "availabilitySetName": {
+            "value": "AZ-US-E-DEV-COHO-AVS-01"
+        },
+        "tags": {
+            "value": {
+                "ApplicationName": "Windows Oracle DB sever for Cohesity Testing",
+                "BauschTechnicalContact1": "Bhakti.Vorai@valeant.com",
+                "BauschTechnicalContact2": "Terrell.Colyer2@valeant.com",
+                "BusinessContact1": "Terrell.Colyer2@valeant.com",
+                "ChargebackCode": "N/A",
+                "CreatedBy": "Infosys-Cloud MSP - Anusha Muthakani",
+                "CreationDate": "09/20/2021",
+                "Description": "Windows Oracle DB sever for Cohesity Testing",
+                "Environment": "DEV",
+                "ManagedBy": "Infosys-Cloud MSP",
+                "VendorTechnicalContact1": "N/A"
+            }
+        },
+        "nicConfigurations": {
+            "value": [
+                {
+                    "nicSuffix": "-NIC-01",
+                    "ipConfigurations": [
+                        {
+                            "name": "ipconfig1",
+                            "subnetId": "/subscriptions/subid/resourceGroups/AZ-US-E-DEV-NET-RG-01/providers/Microsoft.Network/virtualNetworks/AZ-US-E-DEV-NET-VNT-01/subnets/AZ-US-E-DEV-DB1-SN-01"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
