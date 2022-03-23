@@ -1,0 +1,37 @@
+parameters:
+  resourceGroupName: '$(resourceGroupName)'
+  modulePath: '$(modulePath)'
+  checkoutRepositories: ''
+
+jobs:
+- job:
+  displayName: Post Deployment
+  pool:
+    ${{ if eq(variables['vmImage'], '') }}:
+      name: $(poolName)
+    ${{ if eq(variables['poolName'], '') }}:
+      vmImage: $(vmImage)
+  steps:
+    # [Checkout Repositories] task(s)
+    #--------------------------------
+    - checkout: self
+    - ${{ if ne(parameters.checkoutRepositories, '') }}:
+      - ${{ each checkoutRepository in parameters.checkoutRepositories }}:
+        - checkout: ${{ checkoutRepository }}
+          fetchDepth: 1  # the depth of commits to ask Git to fetch; if not set defaults to no limit
+          path: 's/${{ checkoutRepository }}'
+
+
+    - task: AzurePowerShell@4
+      enabled: true
+      displayName: Initialize data disks of all VMs (Windows) in ${{ parameters.resourceGroupName }}
+      inputs:
+        azureSubscription: $(serviceConnection)
+        ScriptType: InlineScript
+        azurePowerShellVersion: LatestVersion
+        Inline: |
+          $vms = Get-AzVM -ResourceGroupName ${{ parameters.resourceGroupName }}
+          $scriptLocation = "$(modulesRepository)/${{ parameters.modulePath }}/Scripts/InitializeDisksWindows.ps1"
+          foreach ($vm in $vms) {
+            Invoke-AzVMRunCommand -ResourceGroupName ${{ parameters.resourceGroupName }} -Name $vm.Name -CommandId 'RunPowerShellScript' -ScriptPath "$(Build.Repository.LocalPath)/$scriptLocation"
+          }
