@@ -1,0 +1,44 @@
+{
+  "Name": "APPLICATION OWNER",
+  "Id": null,
+  "IsCustom": true,
+  "Description": "Application Owner Or Development Team to have READER only access on APP RGs in addition to Start Stop and Restart VMs",
+  "Actions": [
+	"Microsoft.Authorization/*/read",
+ 	"*/read",
+	"Microsoft.Compute/virtualMachines/start/action",
+        "Microsoft.Compute/virtualMachines/restart/action",
+        "Microsoft.Compute/virtualMachines/deallocate/action"
+  ],
+  "NotActions": [
+  ],
+  "AssignableScopes": [
+"/subscriptions/311bf07e-8efd-4e31-b80d-52d5545be7bd",
+"/subscriptions/409d75e0-8aaa-4385-9ba0-f0f63ffe9496",
+"/subscriptions/33b46a59-603f-4d95-b643-bea012971d8c",
+"/subscriptions/02ecf559-3621-4732-b992-94eac74160ba",
+"/subscriptions/4d0f9294-e219-4cef-ab1f-2fe939413651",
+"/subscriptions/6e971a05-00f0-472f-80b4-a031543f75a6",
+"/subscriptions/f784e69d-7c2b-49ef-bc96-4832fea0a8ba",
+"/subscriptions/ac7b557c-d673-47ba-86cd-b1a6637020b7",
+"/subscriptions/e87acd60-b9e4-4b39-8f57-b1ce626472db",
+"/subscriptions/f2896b89-04e8-418c-a9d4-18f7ec416ee0",
+"/subscriptions/aeb82cd7-627d-4cde-986e-ab536ff8ecad",
+"/subscriptions/20c1ef73-0ee0-4575-bd0e-b9091630de1e",
+"/subscriptions/6886f201-8637-4da2-8134-4040f5902ac6",
+"/subscriptions/f7ceb287-4072-4a33-ab89-18e814538b0e",
+"/subscriptions/a872d598-53cc-4b8d-ba46-174d17f06e23",
+"/subscriptions/2fa46a3e-6ea6-455b-91b9-2c8cf7824973",
+"/subscriptions/f45a1660-8627-4207-bcb0-5d4df910ddb5",
+"/subscriptions/7420e5e2-046f-40be-b6b9-95263a973b2f",
+"/subscriptions/e168972c-7dbf-47d6-a7a8-5b48269f4f5b",
+"/subscriptions/861844a9-f7b4-4c15-9e10-5450aaa80fb2",
+"/subscriptions/c45b1ef9-5fb6-434d-9e52-f4ae9f9c53e2",
+"/subscriptions/a048c5a9-bb63-4b05-af05-a9e836878437",
+"/subscriptions/272b3a78-36e7-4a35-b2ae-b9ea74a77b78",
+"/subscriptions/1b336e19-883c-4ce1-b9d8-afdd76a89e9b",
+"/subscriptions/cd2c6cf1-2f31-4b71-9236-026702f6d64d",
+"/subscriptions/2d841af1-5766-4b79-bd6f-3bd7f604d178",
+"/subscriptions/c37292a7-5ded-41a0-872a-bb8f3cef14be"
+  ]
+}
