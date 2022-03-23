@@ -1,0 +1,25 @@
+parameters:
+  deploymentBlocks: ''
+
+jobs:
+- ${{ each deploymentBlock in parameters.deploymentBlocks }}:
+  - job: ${{ deploymentBlock.virtualMachineName }}
+    pool:
+      ${{ if eq(variables['vmImage'], '') }}:
+        name: $(poolName)
+      ${{ if eq(variables['poolName'], '') }}:
+        vmImage: $(vmImage)
+    steps:
+      - task: AzurePowerShell@4
+        enabled: true
+        displayName: Set Static IP for all VMs in ${{ deploymentBlock.resourceGroupName }}
+        inputs:
+          azureSubscription: $(serviceConnection)
+          ScriptType: InlineScript
+          azurePowerShellVersion: LatestVersion
+          Inline: |
+            Write-Host ${{ deploymentBlock.resourceGroupName }}
+            Write-Host ${{ deploymentBlock.virtualMachineName }}
+            $Nic = Get-AzNetworkInterface -ResourceGroupName ${{ deploymentBlock.resourceGroupName }} -Name ${{ deploymentBlock.virtualMachineName }}"-NIC-01" 
+            $Nic.IpConfigurations[0].PrivateIpAllocationMethod = "Static"	
+            Set-AzNetworkInterface -NetworkInterface $Nic
