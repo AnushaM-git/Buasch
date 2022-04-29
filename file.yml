@@ -75,7 +75,7 @@ stages:
       modulePath: $(modulesPath)/ResourceGroup
       deploymentBlocks:
       - path: $(parametersPath)/ResourceGroup/parameters.json
-        resourceGroupName: AZ-US-E-DEV-FLEXAPP-RG-01
+        resourceGroupName: AZ-US-E-DEV-xxx-RG-01
         jobName: DeployResourceGroup
       checkoutRepositories:
       - AZ-SERVICES
@@ -86,7 +86,7 @@ stages:
       modulePath: $(modulesPath)/VirtualMachines
       deploymentBlocks:
       - path: $(parametersPath)/VirtualMachines/parameters.json
-        resourceGroupName: AZ-US-E-DEV-FLEXAPP-RG-01
+        resourceGroupName: AZ-US-E-DEV-xxx-RG-01
         jobName: DeployVirtualMachines
       checkoutRepositories:
       - AZ-SERVICES
@@ -101,6 +101,6 @@ stages:
   - template: /Modules/ARM/VirtualMachines/Pipeline/pipeline.jobs.post.staticip.yml@AZ-SERVICES 
     parameters:
       deploymentBlocks:
-      - resourceGroupName: AZ-US-E-DEV-FLEXAPP-RG-01
-        virtualMachineName: SWIUSEAFLXD01
+      - resourceGroupName: AZ-US-E-DEV-xxxx-RG-01
+        virtualMachineName: 
     
